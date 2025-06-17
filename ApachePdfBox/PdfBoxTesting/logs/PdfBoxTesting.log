@@ -1,0 +1,6 @@
+2025-06-17 20:18:19.842 [http-nio-8080-exec-5] DEBUG o.a.p.MergeMultiplePdfsIntoOneServlet - Started to merge pdfs into one
+2025-06-17 20:18:19.844 [http-nio-8080-exec-5] DEBUG o.a.p.MergeMultiplePdfsIntoOneServlet - Sample PDFs Path: /home/shamim/Pdf, Merged Pdf Path /home/shamim/Pdf/MergedPdfs/p.pdf
+2025-06-17 20:18:19.847 [http-nio-8080-exec-5] DEBUG o.a.p.MergeMultiplePdfsIntoOneServlet - Pdf Files are: [Java.pdf, Go.pdf, Python.pdf, C#.pdf]
+2025-06-17 20:18:19.859 [http-nio-8080-exec-5] DEBUG o.a.p.MergeMultiplePdfsIntoOneServlet - File created: /home/shamim/Pdf/MergedPdfs/p.pdf
+2025-06-17 20:18:19.910 [http-nio-8080-exec-5] DEBUG o.a.p.MergeMultiplePdfsIntoOneServlet - PDFs merged successfully to: /home/shamim/Pdf/MergedPdfs/p.pdf
+2025-06-17 20:18:19.910 [http-nio-8080-exec-5] DEBUG o.a.p.MergeMultiplePdfsIntoOneServlet - Successfully merged PDFs into one page
