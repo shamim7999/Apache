@@ -2,15 +2,15 @@ package org.apache.params;
 
 public class ImageLoadParameters
 {
-    public float scaleFactor = 1.0f;
-    public float density;
-    public float xAxis;
-    public float yAxis;
-    public float height;
-    public float width;
-    public String imageFilePath;
-    public String documentPath;
-    public String outputPath;
+    private float scaleFactor = 1.0f;
+    private float density;
+    private float xAxis;
+    private float yAxis;
+    private float height;
+    private float width;
+    private String imageFilePath;
+    private String documentPath;
+    private String outputPath;
 
     public void setDensity(float density) {
         this.density = density;
