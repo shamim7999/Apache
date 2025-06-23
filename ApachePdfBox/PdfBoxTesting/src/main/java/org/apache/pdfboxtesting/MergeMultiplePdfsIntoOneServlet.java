@@ -10,7 +10,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.params.ImageLoadParameters;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import jakarta.servlet.ServletException;
@@ -31,6 +35,8 @@ public class MergeMultiplePdfsIntoOneServlet extends HttpServlet {
             List<ByteArrayInputStream> pdfStreams = getPdfStreams(samplePdfsPath);
             // 2. Merge all streams into one PDF
             mergePdfs(pdfStreams, singlePdfPath);
+
+
             logger.debug("Successfully merged PDFs into one page");
             request.getRequestDispatcher("success.jsp").forward(request, response);
         }

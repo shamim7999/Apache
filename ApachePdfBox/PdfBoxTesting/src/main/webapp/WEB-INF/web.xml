@@ -15,4 +15,14 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>insertImageToPdfServlet</servlet-name>
+        <servlet-class>org.apache.pdfboxtesting.InsertImageToPdfServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>insertImageToPdfServlet</servlet-name>
+        <url-pattern>/insert-image-to-pdf</url-pattern>
+    </servlet-mapping>
+
 </web-app>
