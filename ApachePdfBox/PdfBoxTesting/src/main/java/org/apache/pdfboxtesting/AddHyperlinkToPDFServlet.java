@@ -12,8 +12,6 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.interactive.action.PDActionURI;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationLink;
-import org.apache.pdfbox.pdmodel.interactive.annotation.PDBorderStyleDictionary;
-import org.apache.pdfbox.pdmodel.interactive.annotation.handlers.PDLinkAppearanceHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,21 +54,18 @@ public class AddHyperlinkToPDFServlet extends HttpServlet {
             page = new PDPage();
             document.addPage(page);
         } else {
-            page = document.getPage(0); // or whichever page you want to add to
+            page = document.getPage(0);
         }
 
         PDRectangle linkRect = new PDRectangle(urlInsertParameters.getXAxis(), urlInsertParameters.getYAxis(), urlInsertParameters.getWidth(), urlInsertParameters.getHeight());
 
-        // Create a clickable link annotation
         PDAnnotationLink link = new PDAnnotationLink();
         link.setRectangle(linkRect);
 
-        // Set the link action (URL)
         PDActionURI action = new PDActionURI();
-        action.setURI(urlInsertParameters.getUrl()); // Your URL here
+        action.setURI(urlInsertParameters.getUrl());
         link.setAction(action);
 
-        // Add the link to the page
         page.getAnnotations().add(link);
 
         try (PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true)) {
@@ -81,7 +76,6 @@ public class AddHyperlinkToPDFServlet extends HttpServlet {
             contentStream.endText();
         }
 
-        // Save the PDF
         document.save(urlInsertParameters.getOutputPath());
         document.close();
     }
