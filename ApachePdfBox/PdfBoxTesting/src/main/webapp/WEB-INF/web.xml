@@ -25,4 +25,14 @@
         <url-pattern>/insert-image-to-pdf</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>insertURLToPdfServlet</servlet-name>
+        <servlet-class>org.apache.pdfboxtesting.AddHyperlinkToPDFServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>insertURLToPdfServlet</servlet-name>
+        <url-pattern>/insert-url-to-pdf</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -1,3 +1,0 @@
-2025-06-23 17:12:51.812 [http-nio-8080-exec-5] DEBUG o.a.p.InsertImageToPdfServlet - Successfully merged PDFs into one page
-2025-06-23 17:30:21.106 [http-nio-8080-exec-4] DEBUG o.a.p.InsertImageToPdfServlet - Successfully inserted image into pdf
-2025-06-23 17:30:56.286 [http-nio-8080-exec-6] DEBUG o.a.p.InsertImageToPdfServlet - Successfully inserted image into pdf
