@@ -65,17 +65,10 @@ public class AddHyperlinkToPDFServlet extends HttpServlet {
         PDAnnotationLink link = new PDAnnotationLink();
         link.setRectangle(linkRect);
 
-        // Optional: Set a border to make it visible (0 width = invisible but active)
-        PDBorderStyleDictionary borderStyle = new PDBorderStyleDictionary();
-        borderStyle.setWidth(0); // Make clickable but no visible border
-        link.setBorderStyle(borderStyle);
-
         // Set the link action (URL)
         PDActionURI action = new PDActionURI();
         action.setURI(urlInsertParameters.getUrl()); // Your URL here
         link.setAction(action);
-
-        new PDLinkAppearanceHandler(link, document).generateAppearanceStreams();
 
         // Add the link to the page
         page.getAnnotations().add(link);
