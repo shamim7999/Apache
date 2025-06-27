@@ -4,17 +4,23 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.helper.ImageUtils;
 import org.apache.params.URLInsertParameters;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.color.PDColor;
+import org.apache.pdfbox.pdmodel.graphics.color.PDDeviceRGB;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.pdmodel.interactive.action.PDActionURI;
 import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationLink;
+import org.apache.pdfbox.pdmodel.interactive.annotation.PDBorderStyleDictionary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -32,6 +38,7 @@ public class AddHyperlinkToPDFServlet extends HttpServlet {
             urlInsertParameters.setDocumentPath(request.getParameter("documentPath"));
             urlInsertParameters.setOutputPath(request.getParameter("outputPath"));
             urlInsertParameters.setLinkText(request.getParameter("linkText"));
+            urlInsertParameters.setImageFilePath(request.getParameter("imageFilePath"));
             urlInsertParameters.setUrl(request.getParameter("url"));
 
             addURLToPdf(urlInsertParameters);
@@ -57,6 +64,64 @@ public class AddHyperlinkToPDFServlet extends HttpServlet {
             page = document.getPage(0);
         }
 
+        if (urlInsertParameters.getImageFilePath() != null && !urlInsertParameters.getImageFilePath().isEmpty()) {
+            addImageUrl(urlInsertParameters, document, page);
+        }
+        else {
+            addTextUrl(urlInsertParameters, document, page);
+        }
+
+        document.save(urlInsertParameters.getOutputPath());
+        document.close();
+    }
+
+    private void addTextUrl(URLInsertParameters urlInsertParameters, PDDocument document, PDPage page) throws IOException {
+
+        try (PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true)) {
+            urlInsertParameters.setWidth(100f);
+            urlInsertParameters.setHeight(12f);
+            PDAnnotationLink link = getAnnotationLink(urlInsertParameters);
+
+            // Make link blue and underlined with no border rectangle
+            PDBorderStyleDictionary border = new PDBorderStyleDictionary();
+            border.setWidth(0); // No border rectangle
+            border.setStyle(PDBorderStyleDictionary.STYLE_UNDERLINE); // Just underline
+            link.setBorderStyle(border);
+            link.setColor(new PDColor(new float[]{0, 0, 1}, PDDeviceRGB.INSTANCE)); // Blue
+
+            page.getAnnotations().add(link);
+            contentStream.beginText();
+            contentStream.setNonStrokingColor(Color.BLUE); // Text color blue
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            contentStream.newLineAtOffset(urlInsertParameters.getXAxis(), urlInsertParameters.getYAxis());
+            contentStream.showText(urlInsertParameters.getLinkText());
+            contentStream.endText();
+        }
+    }
+
+    private void addImageUrl(URLInsertParameters urlInsertParameters, PDDocument document, PDPage page) throws IOException {
+        try (PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true)) {
+
+            PDImageXObject image = PDImageXObject.createFromFile(
+                    urlInsertParameters.getImageFilePath(), document);
+            float[] customSize = ImageUtils.calculateSize(urlInsertParameters.getImageFilePath(), urlInsertParameters.getWidth());
+
+            urlInsertParameters.setWidth(customSize[0]);
+            urlInsertParameters.setHeight(customSize[1]);
+
+            page.getAnnotations().add(getAnnotationLink(urlInsertParameters));
+
+            contentStream.drawImage(
+                    image,
+                    urlInsertParameters.getXAxis(),
+                    urlInsertParameters.getYAxis(),
+                    urlInsertParameters.getWidth(),
+                    urlInsertParameters.getHeight()
+            );
+        }
+    }
+
+    private PDAnnotationLink getAnnotationLink(URLInsertParameters urlInsertParameters) throws IOException {
         PDRectangle linkRect = new PDRectangle(urlInsertParameters.getXAxis(), urlInsertParameters.getYAxis(), urlInsertParameters.getWidth(), urlInsertParameters.getHeight());
 
         PDAnnotationLink link = new PDAnnotationLink();
@@ -66,17 +131,6 @@ public class AddHyperlinkToPDFServlet extends HttpServlet {
         action.setURI(urlInsertParameters.getUrl());
         link.setAction(action);
 
-        page.getAnnotations().add(link);
-
-        try (PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true)) {
-            contentStream.beginText();
-            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
-            contentStream.newLineAtOffset(urlInsertParameters.getXAxis(), urlInsertParameters.getYAxis());
-            contentStream.showText(urlInsertParameters.getLinkText());
-            contentStream.endText();
-        }
-
-        document.save(urlInsertParameters.getOutputPath());
-        document.close();
+        return link;
     }
 }

@@ -122,7 +122,11 @@
 
         <div class="form-group">
             <label for="linkText">Link Text:</label>
-            <input type="text" id="linkText" name="linkText" value="Click Here" required>
+            <input type="text" id="linkText" name="linkText" value="Click Here">
+        </div>
+        <div class="form-group">
+            <label for="imageFilePath">Image File Path:</label>
+            <input type="text" id="imageFilePath" name="imageFilePath" value="">
         </div>
         <div class="form-group">
             <label for="url">Action URL:</label>

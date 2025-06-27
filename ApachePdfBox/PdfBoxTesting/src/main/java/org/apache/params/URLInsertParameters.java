@@ -9,6 +9,7 @@ public class URLInsertParameters {
     private String outputPath;
     private String linkText;
     private String url;
+    private String imageFilePath;
 
     public void setXAxis(float xAxis) {
         this.xAxis = xAxis;
@@ -34,6 +35,7 @@ public class URLInsertParameters {
     public void setUrl(String url) {
         this.url = url;
     }
+    public void setImageFilePath(String imageFilePath) {this.imageFilePath = imageFilePath;}
 
     public float getXAxis() {
         return xAxis;
@@ -59,4 +61,5 @@ public class URLInsertParameters {
     public String getUrl() {
         return url;
     }
+    public String getImageFilePath() { return imageFilePath; }
 }
