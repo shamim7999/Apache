@@ -1,5 +1,7 @@
 package org.apache.params;
 
+import org.apache.common.enums.PdfBoxLibrary;
+
 public class ImageLoadParameters
 {
     private float scaleFactor = 1.0f;
@@ -11,6 +13,7 @@ public class ImageLoadParameters
     private String imageFilePath;
     private String documentPath;
     private String outputPath;
+    private PdfBoxLibrary pdfBoxLibrary;
 
     public void setDensity(float density) {
         this.density = density;
@@ -39,7 +42,9 @@ public class ImageLoadParameters
     public void setOutputPath(String outputPath) {
         this.outputPath = outputPath;
     }
-
+    public  void setPdfBoxLibrary(PdfBoxLibrary pdfBoxLibrary) {
+        this.pdfBoxLibrary = pdfBoxLibrary;
+    }
 
 
     public float getScaleFactor() {
@@ -68,5 +73,8 @@ public class ImageLoadParameters
     }
     public String getOutputPath() {
         return outputPath;
+    }
+    public PdfBoxLibrary getPdfBoxLibrary() {
+        return pdfBoxLibrary;
     }
 }

@@ -90,6 +90,14 @@
             <input type="text" id="outputPath" name="outputPath"
                    value="/home/shamim/Pdf/MergedPdfs/c.pdf" required>
         </div>
+        <!-- New PDF Library Selection Field -->
+        <div class="form-group">
+            <label for="pdfLibrary">PDF Library:</label>
+            <select id="pdfLibrary" name="pdfLibrary" required>
+                <option value="ITEXT">iText</option>
+                <option value="APACHE_PDFBOX">Apache PDFBox</option>
+            </select>
+        </div>
 
         <div class="form-group">
             <input type="submit" value="Submit Parameters">
