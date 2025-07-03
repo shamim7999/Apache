@@ -168,12 +168,12 @@
         </div>
         <div class="form-group">
             <label for="ownerPassword">Owner Password:</label>
-            <input type="text" id="ownerPassword" name="ownerPassword" placeholder="Owner Password"
+            <input type="password" id="ownerPassword" name="ownerPassword" placeholder="Owner Password"
                    value="" required>
         </div>
         <div class="form-group">
             <label for="userPassword">User Password:</label>
-            <input type="text" id="userPassword" name="userPassword" placeholder="User Password"
+            <input type="password" id="userPassword" name="userPassword" placeholder="User Password"
                    value="" required>
         </div>
 
