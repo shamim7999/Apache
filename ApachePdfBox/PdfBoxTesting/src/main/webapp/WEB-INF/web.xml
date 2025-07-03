@@ -35,4 +35,14 @@
         <url-pattern>/insert-url-to-pdf</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>pdfEncryptionServlet</servlet-name>
+        <servlet-class>org.apache.pdfboxtesting.PdfEncryptionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>pdfEncryptionServlet</servlet-name>
+        <url-pattern>/encrypt-pdf</url-pattern>
+    </servlet-mapping>
+
 </web-app>

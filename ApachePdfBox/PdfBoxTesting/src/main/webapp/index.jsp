@@ -150,5 +150,56 @@
     </form>
 </div>
 
+<br><br>
+<div class="form-container">
+    <h2>Crypto Operation Parameters</h2>
+    <form action="encrypt-pdf" method="post">
+
+        <div class="form-group">
+            <label for="documentPath">Document Path:</label>
+            <input type="text" id="documentPath" name="documentPath"
+                   value="/home/shamim/Pdf/MergedPdfs/b.pdf" required>
+        </div>
+
+        <div class="form-group">
+            <label for="outputPath">Output Path:</label>
+            <input type="text" id="outputPath" name="outputPath"
+                   value="/home/shamim/Pdf/MergedPdfs/c.pdf" required>
+        </div>
+        <div class="form-group">
+            <label for="ownerPassword">Owner Password:</label>
+            <input type="text" id="ownerPassword" name="ownerPassword" placeholder="Owner Password"
+                   value="" required>
+        </div>
+        <div class="form-group">
+            <label for="userPassword">User Password:</label>
+            <input type="text" id="userPassword" name="userPassword" placeholder="User Password"
+                   value="" required>
+        </div>
+
+        <div class="form-group">
+            <label for="pdfLibrary">PDF Library:</label>
+            <select id="pdfLibrary" name="pdfLibrary" required>
+                <option value="ITEXT">iText</option>
+                <option value="APACHE_PDFBOX">Apache PDFBox</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="cryptoOperation">Crypto Operation</label>
+            <select id="cryptoOperation" name="cryptoOperation" required>
+                <option value="ENCRYPT">ENCRYPT</option>
+                <option value="DECRYPT">DECRYPT</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit Parameters">
+        </div>
+    </form>
+</div>
+
+
+
 </body>
 </html>
